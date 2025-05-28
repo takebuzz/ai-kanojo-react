@@ -59,7 +59,7 @@ export default function Chat({ settings }) {
     ? settings.customHeader
     : `💖 ${settings.name}（${settings.personality}）ちゃん`;
 
-  const avatarUrl = "https://1.bp.blogspot.com/-STxSApXqqxg/XVesvHTM9ZI/AAAAAAABU3g/1eXwTw6-VSkwij2U1tuSrJ0gRv5V-1aVACLcBGAs/s400/pose_kimegao_gal_woman.png";
+  const avatarUrl = process.env.PUBLIC_URL + "/avatar.jpeg";
 
   return (
     <div style={{ padding: '1rem' }}>
