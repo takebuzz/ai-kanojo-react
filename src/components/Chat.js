@@ -30,9 +30,13 @@ export default function Chat({ settings }) {
       const data = await response.json();
 
       if (!data.choices || !data.choices[0]) {
+        console.error("APIエラーのレスポンス内容:", data);
         setMessages([
           ...newMessages,
-          { role: 'assistant', content: 'エラーが発生しました。後でもう一度試してね！' },
+          {
+            role: 'assistant',
+            content: `エラーが発生しました：${data.error?.message || '詳細不明'}`,
+          },
         ]);
         return;
       }
@@ -40,11 +44,14 @@ export default function Chat({ settings }) {
       const aiMessage = data.choices[0].message;
       setMessages([...newMessages, aiMessage]);
     } catch (error) {
+      console.error('送信時の通信エラー:', error);
       setMessages([
         ...newMessages,
-        { role: 'assistant', content: '通信エラーが発生しました。' },
+        {
+          role: 'assistant',
+          content: '通信エラーが発生しました。しばらくしてからもう一度お試しください。',
+        },
       ]);
-      console.error('送信エラー:', error);
     }
   };
 
@@ -77,4 +84,3 @@ export default function Chat({ settings }) {
     </div>
   );
 }
-
