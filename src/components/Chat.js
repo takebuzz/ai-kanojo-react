@@ -55,9 +55,25 @@ export default function Chat({ settings }) {
     }
   };
 
+  const headerText = settings.customHeader?.trim()
+    ? settings.customHeader
+    : `💖 ${settings.name}（${settings.personality}）ちゃん`;
+
   return (
     <div style={{ padding: '1rem' }}>
-      <h2>{settings.name}ちゃんとのチャット</h2>
+      <div style={{
+        backgroundColor: '#f7f7f7',
+        padding: '1rem',
+        marginBottom: '10px',
+        borderRadius: '10px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: '18px'
+      }}>
+        {headerText}
+      </div>
+
       <div
         style={{
           border: '1px solid #ccc',
