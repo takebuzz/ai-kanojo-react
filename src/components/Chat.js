@@ -5,9 +5,39 @@ export default function Chat({ settings }) {
   const [input, setInput] = useState('');
 
   const sendMessage = async () => {
-    const newMessages = [...messages, { role: 'user', content: input }];
-    setMessages(newMessages);
-    setInput('');
+  const newMessages = [...messages, { role: 'user', content: input }];
+  setMessages(newMessages);
+  setInput('');
+
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: newMessages
+      })
+    });
+
+    const data = await response.json();
+
+    if (!data.choices || !data.choices[0]) {
+      setMessages([...newMessages, { role: 'assistant', content: 'エラーが発生しました。後でもう一度試してね！' }]);
+      return;
+    }
+
+    const aiMessage = data.choices[0].message;
+    setMessages([...newMessages, aiMessage]);
+
+  } catch (error) {
+    setMessages([...newMessages, { role: 'assistant', content: '通信エラーが発生しました。' }]);
+    console.error('送信エラー:', error);
+  }
+};
+
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
