@@ -44,7 +44,7 @@ export default function Chat({ settings }) {
       const aiMessage = data.choices[0].message;
       setMessages([...newMessages, aiMessage]);
     } catch (error) {
-      console.error('送信時の通信エラー:', error);
+      console.error('通信エラー:', error);
       setMessages([
         ...newMessages,
         {
@@ -59,7 +59,7 @@ export default function Chat({ settings }) {
     ? settings.customHeader
     : `💖 ${settings.name}（${settings.personality}）ちゃん`;
 
-  const avatarUrl = process.env.PUBLIC_URL + "/public/avatar.jpeg";
+  const avatarUrl = "/avatar.jpeg"; // ← Vercel用に絶対パス！
 
   return (
     <div style={{ padding: '1rem' }}>
@@ -93,6 +93,7 @@ export default function Chat({ settings }) {
             style={{
               display: 'flex',
               justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+              alignItems: 'flex-start',
               marginBottom: '10px',
             }}
           >
