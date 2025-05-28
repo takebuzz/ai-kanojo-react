@@ -81,15 +81,40 @@ export default function Chat({ settings }) {
           height: '300px',
           overflowY: 'scroll',
           marginBottom: '10px',
+          backgroundColor: '#fff',
+          borderRadius: '10px',
         }}
       >
         {messages.slice(1).map((msg, idx) => (
-          <div key={idx}>
-            <strong>{msg.role === 'user' ? 'あなた' : settings.name}：</strong>
-            {msg.content}
+          <div
+            key={idx}
+            style={{
+              display: 'flex',
+              justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+              marginBottom: '10px',
+            }}
+          >
+            <div
+              style={{
+                maxWidth: '70%',
+                padding: '10px 15px',
+                borderRadius: '20px',
+                backgroundColor: msg.role === 'user' ? '#dcf8c6' : '#f1f0f0',
+                color: '#000',
+                textAlign: 'left',
+                whiteSpace: 'pre-wrap',
+                lineHeight: '1.4',
+              }}
+            >
+              <strong style={{ fontSize: '12px', color: '#888' }}>
+                {msg.role === 'user' ? 'あなた' : settings.name}
+              </strong>
+              <div>{msg.content}</div>
+            </div>
           </div>
         ))}
       </div>
+
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
