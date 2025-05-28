@@ -59,6 +59,8 @@ export default function Chat({ settings }) {
     ? settings.customHeader
     : `💖 ${settings.name}（${settings.personality}）ちゃん`;
 
+  const avatarUrl = "https://1.bp.blogspot.com/-STxSApXqqxg/XVesvHTM9ZI/AAAAAAABU3g/1eXwTw6-VSkwij2U1tuSrJ0gRv5V-1aVACLcBGAs/s400/pose_kimegao_gal_woman.png";
+
   return (
     <div style={{ padding: '1rem' }}>
       <div style={{
@@ -94,6 +96,19 @@ export default function Chat({ settings }) {
               marginBottom: '10px',
             }}
           >
+            {msg.role !== 'user' && (
+              <img
+                src={avatarUrl}
+                alt="AI彼女"
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  marginRight: '8px',
+                  objectFit: 'cover',
+                }}
+              />
+            )}
             <div
               style={{
                 maxWidth: '70%',
