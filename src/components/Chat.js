@@ -59,7 +59,7 @@ export default function Chat({ settings }) {
     ? settings.customHeader
     : `💖 ${settings.name}（${settings.personality}）ちゃん`;
 
-  const avatarUrl = process.env.PUBLIC_URL + "/avatar.jpeg";
+  const avatarUrl = process.env.PUBLIC_URL + "/public/avatar.jpeg";
 
   return (
     <div style={{ padding: '1rem' }}>
